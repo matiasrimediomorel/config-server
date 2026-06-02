@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+       routes:
+         - id: checkout
+           uri: lb://checkout-service
+           predicates:
+             - Path=/checkout/**
+           filters:
+             - AddRequestHeader=X-Request-from, gateway
+             - AddResponseHeader=X-Response-red, blue
+         - id: product
+           uri: lb://products-service-v1
+           predicates:
+             - Path=/products/**
+           filters:
+             - AddRequestHeader=X-Request-from, gateway
+             - AddResponseHeader=X-Response-red, blue         
+
+server:
+  port: 8087
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: "${spring.application.name}:${server.port}"
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web: DEBUG
+    reactor.netty: DEBUG

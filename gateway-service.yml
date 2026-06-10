@@ -38,6 +38,8 @@ eureka:
 
 logging:
   level:
+    org.springframework.security: DEBUG
+    org.springframework.boot.autoconfigure.security: DEBUG
     org.springframework.cloud.gateway: DEBUG
     org.springframework.web: DEBUG
     reactor.netty: DEBUG

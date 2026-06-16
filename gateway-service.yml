@@ -8,6 +8,8 @@ spring:
           issuer-uri: http://localhost:8080/realms/Digital
   cloud:
     gateway:
+       default-filters:
+         - TokenRelay=
        routes:
          - id: checkout
            uri: lb://checkout-service

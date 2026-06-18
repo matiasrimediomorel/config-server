@@ -45,3 +45,8 @@ logging:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.web: DEBUG
     reactor.netty: DEBUG
+    
+management:
+ tracing:
+  sampling:
+   probability: 1.0
